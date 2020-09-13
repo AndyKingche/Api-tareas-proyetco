@@ -37,8 +37,14 @@ router.post('/',(req,res) => {
 });
 
 router.put('/:id',(req,res) => {
-    controller.putTarea(req.params.id,req.body.descripcion, req.body.nombre,req.body.fechafin).then(( )=>{
-        response.successpost(req,res,'Tarea actualizada correctamente',201);
+    controller.putTarea(req.params.id,req.body.descripcion, req.body.nombre,req.body.fechafin).then((update)=>{
+        if(update != null){
+            response.successpost(req,res,'Tarea actualizada correctamente',201);
+        }else{
+            response.error(req,res,'No existe el id',400,'error');
+
+        }
+        
     })
     .catch(e => {
         response.error(req,res,'La infomracion ingresada es invalida o no existe el id',400,e);

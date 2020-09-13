@@ -34,20 +34,19 @@ async function getTareabyId(id){
        
  }
 
- async function putTarea(id,descripcion,nombre,fechaFin){
-     console.log("puts "+fechaFin);
+ function putTarea(id,descripcion,nombre,fechaFin){
     return new Promise((resolve,reject) =>{
         if(!descripcion || !nombre || !fechaFin){
             return reject("los datos son incorrectos");
         }
         const fullTarea = {
-            id:id,
             descripcion: descripcion,
             nombre: nombre,
             fechafin: fechaFin,
         };
-        store.put(fullTarea);
-        resolve(fullTarea);
+        resolve(store.put(id,fullTarea));
+        
+        
     });
      
  }

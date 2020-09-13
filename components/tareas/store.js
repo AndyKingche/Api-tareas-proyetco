@@ -26,18 +26,29 @@ async function getTareabyId(id){
 return tarea;
 
 }
-async function putTarea(updatetarea){
-    const values = [updatetarea.descripcion, updatetarea.nombre, updatetarea.fechafin,updatetarea.id];
-    const tarea = await modelTarea.connection.query(`UPDATE tareas SET
-    descripcion = $1,
-    nombre = $2,
-    fechafin = $3 
-    WHERE id = $4`,values)
-    .then(res => {
+async function putTarea(id,updatetarea){
+    const values = [updatetarea.descripcion, updatetarea.nombre, updatetarea.fechafin,id];
+    const consulta = modelTarea.connection.query(`SELECT * FROM tareas WHERE id = ${id}`).then(res=>{
         return res.rows[0];
     });
-return tarea;
+    if(consulta!=null){
+        const tarea = await modelTarea.connection.query(`UPDATE tareas SET
+        descripcion = $1,
+        nombre = $2,
+        fechafin = $3 
+        WHERE id = $4 returning id`,values)
+        .then((rest) => {
+                console.log("m",rest.rows[0])
+                return rest.rows[0];
+        });
+        return tarea;
+    }
+    else{
+        return -1;
+    }
+    
 
+   
 }
 function deleteTarea(id){
     console.log("id "+id);
