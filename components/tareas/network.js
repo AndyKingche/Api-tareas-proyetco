@@ -12,7 +12,15 @@ router.get('/',(req,res) => {
 });
 router.get('/:id',(req,res) => {
     controller.getTareabyId(req.params.id).then((tareaList) =>{
-        response.successget(req, res, tareaList,200);
+         
+        if(tareaList!=null){
+            response.successget(req, res, tareaList,200);
+
+        }
+        else{
+            response.error(res,res, 'No se encontro la tarea solicituado',500,'error en el get by id');
+        }
+        
     }).catch(e =>{
         response.error(res,res, 'Unexpected',500,e);
     });
