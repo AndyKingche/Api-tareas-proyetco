@@ -1,7 +1,7 @@
 const modelTarea = require('./model');
 
 async function addTarea(tarea){
-    const values = [tarea.descripcion, tarea.nombre, tarea.fechaFin];
+    const values = [tarea.descripcion, tarea.nombre, tarea.fechafin];
     const insertTarea = await modelTarea.connection.query(`INSERT INTO tareas(descripcion, nombre, fechafin) VALUES($1, $2, $3) returning id`,values)
   .then(res => {
     return res.rows[0].id;
