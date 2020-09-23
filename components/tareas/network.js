@@ -18,7 +18,7 @@ router.get('/:id',(req,res) => {
 
         }
         else{
-            response.error(res,res, tareaList ,500,'No se encontro el id requerido');
+            response.error(res,res, "No se encontro el id" ,500,'No se encontro el id requerido');
         }
         
     }).catch(e =>{
