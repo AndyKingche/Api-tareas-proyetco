@@ -18,7 +18,7 @@ router.get('/:id',(req,res) => {
 
         }
         else{
-            response.error(res,res, 'No se encontro la tarea solicituado',500,'error en el get by id');
+            response.error(res,res, tareaList ,500,'No se encontro el id requerido');
         }
         
     }).catch(e =>{
@@ -41,7 +41,7 @@ router.put('/:id',(req,res) => {
         if(update != null){
             response.successpost(req,res,'Tarea actualizada correctamente',201);
         }else{
-            response.error(req,res,'No existe el id',400,'error');
+            response.error(req,res,'No existe el id',500,'error');
 
         }
         
